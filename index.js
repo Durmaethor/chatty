@@ -1,4 +1,4 @@
-const messages = [];
+const messages = ["Test"];
 
 const express = require('express');
 const bodyParser = require('body-parser');
@@ -13,5 +13,10 @@ app.listen(port, function(){
 });
 
 app.get('/messages', function(req, res, next){
-    console.log(req.body);
-} )
+   res.status(200).json({ messages: messages });
+});
+
+app.post('/messages', function(req, res, next){
+    messages.push(req.body.message);
+    res.status(200).json({ messages: messages });
+});
